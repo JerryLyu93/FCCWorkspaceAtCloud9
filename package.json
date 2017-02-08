@@ -1,0 +1,26 @@
+{
+  "name": "project1",
+  "version": "1.0.0",
+  "description": "ccp api project 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/pandaLv/FCCWorkspaceAtCloud9.git"
+  },
+  "keywords": [
+    "ffc",
+    "node"
+  ],
+  "author": "pandalv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pandaLv/FCCWorkspaceAtCloud9/issues"
+  },
+  "homepage": "https://github.com/pandaLv/FCCWorkspaceAtCloud9#readme",
+  "dependencies": {
+    "express": "^4.14.1"
+  }
+}
