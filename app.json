@@ -1,0 +1,18 @@
+{
+  "name": "FCCWorkspaceAtCloud9",
+  "scripts": {
+    "postdeploy": "server.js"
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
