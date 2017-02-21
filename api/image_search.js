@@ -7,15 +7,15 @@ var params = {
   searchType: 'image'
 };
 
-customsearch.cse.list(params, function (err, response) {
-  if (err) {
-    console.log('Encountered error', err);
-  } else {
-    console.log('Long url is', response);
-  }
-});
-
-// "use static"
-// let express = import('express')
-//
-// express.
+function search (query, callback) {
+  query && (params.q = query)
+  customsearch.cse.list(params, function (err, response) {
+    if (err) {
+      console.log('Encountered error', err);
+    } else {
+      console.log('Long url is', response);
+    }
+    callback(response)
+  });
+}
+module.exports = search
