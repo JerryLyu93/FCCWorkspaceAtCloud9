@@ -35,6 +35,7 @@ function search (query, offset, callback) {
       console.log('Encountered error', err);
       callback(err, null)
     } else {
+      console.log('look like seccess', response)
       callback(null, response)
     }
   });
