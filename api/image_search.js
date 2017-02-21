@@ -11,8 +11,10 @@ var params = {
 };
 
 function search (query, offset, callback) {
+  console.log(query, offset)
   query && (params.q = query)
   offset && (params.start = (offset - 1) * 10 + '')
+  console.log(params)
   // 记录查询内容
   connect(function (db) {
     let searchHistory = db.collection('search_history')
@@ -44,7 +46,7 @@ function getHistory (callback) {
   connect(function (db) {
     let searchHistory = db.collection('search_history')
     return new Promise((resolve, reject) => {
-      searchHistory.find({}, { term: 1, when: 1, _id: 0 }).limit(10).toArray(function (err, result) {
+      searchHistory.find({}, { term: 1, when: 1, _id: 0 }).sort({'_id': -1}).limit(10).toArray(function (err, result) {
         if (err) {
           callback(err, null)
           reject(err)
