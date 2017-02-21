@@ -32,11 +32,9 @@ function search (query, offset, callback) {
 
   customsearch.cse.list(params, function (err, response) {
     if (err) {
-      console.log('Encountered error', err);
       callback(err, null)
     } else {
-      console.log('look like seccess', response)
-      callback(null, response)
+      callback(null, response.items)
     }
   });
 }
