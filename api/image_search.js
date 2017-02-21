@@ -6,11 +6,13 @@ var params = {
   key: 'AIzaSyA3prI-NXnN8pbb6ml1-8ltmJlPgtSmlf8',
   cx: '005638436848923125128:llucr27b3qi',
   q: 'dog',
-  searchType: 'image'
+  searchType: 'image',
+  start: '0'
 };
 
-function search (query, callback) {
+function search (query, offset, callback) {
   query && (params.q = query)
+  offset && (params.start = (parseInt(offset) - 1) * 10)
   // 记录查询内容
   connect(function (db) {
     let searchHistory = db.collection('search_history')
@@ -31,10 +33,10 @@ function search (query, callback) {
   customsearch.cse.list(params, function (err, response) {
     if (err) {
       console.log('Encountered error', err);
+      callback(err, null)
     } else {
-      console.log('Long url is', response);
+      callback(null, response.items)
     }
-    callback(response)
   });
 }
 
@@ -42,7 +44,7 @@ function getHistory (callback) {
   connect(function (db) {
     let searchHistory = db.collection('search_history')
     return new Promise((resolve, reject) => {
-      searchHistory.find().limit(10).toArray(function (err, result) {
+      searchHistory.find({ term: 1, when: 1, _id: 0 }).limit(10).toArray(function (err, result) {
         if (err) {
           callback(err, null)
           reject(err)

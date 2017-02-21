@@ -9,7 +9,7 @@ app.get('/imagesearch/:query', function (req, res) {
     res.send('this api need a query, just like "hostname/imagesearch/dog"')
   }
   let api = require('./api/image_search.js')
-  api.search(req.params.query, function (result) {
+  api.search(req.params.query, req.query.offset, function (result) {
     res.send(result)
   })
 })
