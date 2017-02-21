@@ -35,7 +35,7 @@ function search (query, offset, callback) {
       console.log('Encountered error', err);
       callback(err, null)
     } else {
-      callback(null, response.items)
+      callback(null, response)
     }
   });
 }
