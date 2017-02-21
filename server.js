@@ -4,6 +4,9 @@ var timestamp = require('./api/timestamp')
 var requestHeaderParser = require('./api/requestHeaderParser.js')
 var app = express()
 
+app.get('/imagesearch/:query', function (req, res) {
+  let api = require('./api/image_search.js')
+})
 app.get('/urlshortener/new/*', function (req, res) {
   let api = require('./api/url_shortener')
   api.insert(req.params[0], function (err, result) {
