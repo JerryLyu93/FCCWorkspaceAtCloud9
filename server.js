@@ -5,9 +5,22 @@ var requestHeaderParser = require('./api/requestHeaderParser.js')
 var app = express()
 
 app.get('/imagesearch/:query', function (req, res) {
+  if (!req.params.query) {
+    res.send('this api need a query, just like "hostname/imagesearch/dog"')
+  }
   let api = require('./api/image_search.js')
-  api(req.params.query, function (result) {
+  api.search(req.params.query, function (result) {
     res.send(result)
+  })
+})
+app.get('/latest/imagesearch', function (req, res) {
+  let api = require('./api/image_search')
+  api.getHistory((err, result) => {
+    if (err) {
+      res.send('look like something wrong: ' + err)
+    } else {
+      res.send(result)
+    }
   })
 })
 app.get('/urlshortener/new/*', function (req, res) {
