@@ -7,14 +7,12 @@ var params = {
   cx: '005638436848923125128:llucr27b3qi',
   q: 'dog',
   searchType: 'image',
-  start: '0'
+  start: '1'
 };
 
 function search (query, offset, callback) {
-  console.log(query, offset)
   query && (params.q = query)
-  offset && (params.start = (offset - 1) * 10 + '')
-  console.log(params)
+  offset && (params.start = (offset - 1) * 10 + 1 + '')
   // 记录查询内容
   connect(function (db) {
     let searchHistory = db.collection('search_history')
