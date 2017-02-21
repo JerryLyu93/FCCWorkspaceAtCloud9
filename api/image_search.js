@@ -12,7 +12,7 @@ var params = {
 
 function search (query, offset, callback) {
   query && (params.q = query)
-  offset && (params.start = (parseInt(offset) - 1) * 10)
+  offset && (params.start = (offset - 1) * 10 + '')
   // 记录查询内容
   connect(function (db) {
     let searchHistory = db.collection('search_history')
