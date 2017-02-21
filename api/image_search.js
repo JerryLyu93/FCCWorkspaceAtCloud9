@@ -44,7 +44,7 @@ function getHistory (callback) {
   connect(function (db) {
     let searchHistory = db.collection('search_history')
     return new Promise((resolve, reject) => {
-      searchHistory.find({ term: 1, when: 1, _id: 0 }).limit(10).toArray(function (err, result) {
+      searchHistory.find({}, { term: 1, when: 1, _id: 0 }).limit(10).toArray(function (err, result) {
         if (err) {
           callback(err, null)
           reject(err)
