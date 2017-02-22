@@ -1,9 +1,22 @@
 require('./config/index')
 var express = require('express')
-var timestamp = require('./api/timestamp')
-var requestHeaderParser = require('./api/requestHeaderParser.js')
 var app = express()
+var multer = require('multer')
+var getFile = multer()
 
+app.set('views', './views')
+app.set('view engine', 'jade')
+app.get('/uploadfile', function (req, res) {
+  res.render('uploadfile')
+})
+app.post('/filemetadata', getFile.single('file'), function (req, res) {
+  console.log(req.file)
+  res.send({
+    fileName: req.file.originalname,
+    fileType: req.file.mimetype,
+    fileSize: req.file.size
+  })
+})
 app.get('/imagesearch/:query', function (req, res) {
   if (!req.params.query) {
     res.send('this api need a query, just like "hostname/imagesearch/dog"')
@@ -53,10 +66,11 @@ app.get('/urlshortener/:shorturl', function (req, res) {
   })
 })
 app.get('/timestamp/:time', function (req, res) {
-    // res.writeHead(200, 'Content-type: application/json')
+  var timestamp = require('./api/timestamp')
   res.send(JSON.stringify(timestamp(req.params.time)))
 })
 app.get('/headerparser', function (req, res) {
+  var requestHeaderParser = require('./api/requestHeaderParser.js')
   res.send(requestHeaderParser(req))
 })
 app.get('/', function (req, res) {
